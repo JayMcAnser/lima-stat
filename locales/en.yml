@@ -44,6 +44,7 @@ intro:
   whats-your-name: What's your name?
 not-found: Not found
 sidebar:
+  statistics: Statistics
   calendar: Calendar
   components: Components
   dashboard: Dashboard
@@ -51,6 +52,8 @@ sidebar:
   projects: Projects
   reports: Reports
   team: Team
+statistics:
+  count: Page Views
 features:
   name: Features
   using-the-new-tools:
@@ -77,5 +80,4 @@ features:
   other-tools:
     title: Other tools
     description: ... and many more tools such as TypeScript, Prettier, ESLint, etc.
-  
-      
+

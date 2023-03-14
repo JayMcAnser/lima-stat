@@ -158,7 +158,7 @@ const features = computed(() => [
         </div>
       </div>
       <div
-        class="w-full p-4 pr-10 mr-4 bg-gray-100 rounded-lg  dark:bg-primary-800   right-side dark:shadow-primary-800">
+        class="w-full p-4 pr-10 mr-4 bg-gray-100 rounded-lg  dar  k:bg-primary-800   right-side dark:shadow-primary-800">
         <div class="flex flex-col gap-2">
           <div class="flex flex-wrap gap-2">
             <VBtn>Cancel</VBtn>

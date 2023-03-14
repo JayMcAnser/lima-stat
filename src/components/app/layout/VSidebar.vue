@@ -28,6 +28,18 @@ onMounted(() => {
 
 const sidebarItems = computed(() => [
   {
+    title: t('sidebar.statistics'),
+    icon: 'i-carbon-home',
+    path: '/statistics/index',
+    children: [
+      {
+        title: t('statistics.count'),
+        icon: 'i-carbon-dashboard',
+        path: '/statistics/page-views',
+      },
+    ],
+  },
+  {
     title: t('sidebar.home'),
     icon: 'i-carbon-home',
     path: '/dashboard',
