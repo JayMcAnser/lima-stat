@@ -1,9 +1,10 @@
 <template>
   <div class="text-gray-700 dark:text-gray-200 bg-gray-100">
-    <VHeader />
-    <VSidebar />
+    <div class="flex flex-col">
+      <VSidebar />
+    </div>
     <main
-        class="w-full min-h-screen m-5 pl-72 pt-16 pb-20 main-content text-slate-600 dark:text-slate-50 dark:bg-primary-800"
+        class="flex-col flex flex-grow m-5 pl-72 pt-16 pb-20 main-content text-slate-600 dark:text-slate-50 dark:bg-primary-800"
     >
       <RouterView />
 

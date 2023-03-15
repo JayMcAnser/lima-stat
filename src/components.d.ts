@@ -22,6 +22,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     StatInfo: typeof import('./components/statistics/stat-info.vue')['default']
+    Test: typeof import('./components/app/layout/test.vue')['default']
     TreeNode: typeof import('./components/app/utils/TreeNode.vue')['default']
     VAlert: typeof import('./components/core/data-display/VAlert/VAlert.vue')['default']
     VAvatar: typeof import('./components/core/data-display/VAvatar/VAvatar.vue')['default']
@@ -35,6 +36,7 @@ declare module '@vue/runtime-core' {
     VHeader: typeof import('./components/app/layout/VHeader.vue')['default']
     VRadio: typeof import('./components/core/inputs/VRadio/VRadio.vue')['default']
     VSidebar: typeof import('./components/app/layout/VSidebar.vue')['default']
+    'VSidebar.old': typeof import('./components/app/layout/VSidebar.old.vue')['default']
     VTextField: typeof import('./components/core/inputs/VTextField/VTextField.vue')['default']
   }
 }

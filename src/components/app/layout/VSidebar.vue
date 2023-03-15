@@ -7,12 +7,13 @@ const sidebarCollapsed = ref(false)
 const { bus } = useEventsBus()
 
 watch(
-  () => bus.value.get('sidebarCollapsed'),
-  (val) => {
-    const [sidebarCollapsedBus] = val ?? []
-    sidebarCollapsed.value = sidebarCollapsedBus
-  },
+    () => bus.value.get('sidebarCollapsed'),
+    (val) => {
+      const [sidebarCollapsedBus] = val ?? []
+      sidebarCollapsed.value = sidebarCollapsedBus
+    },
 )
+
 
 const currentIndex = ref(-1)
 function setCurrentIndex(index: number) {
@@ -28,166 +29,119 @@ onMounted(() => {
 
 const sidebarItems = computed(() => [
   {
-    title: t('sidebar.statistics'),
-    icon: 'i-carbon-home',
-    path: '/statistics/index',
-    children: [
-      {
-        title: t('statistics.count'),
-        icon: 'i-carbon-dashboard',
-        path: '/statistics/page-views',
-      },
-    ],
+    id: 1,
+    header: 'Statistics',
+    label: 'Page views',
+    url: 'http://test.url'
   },
   {
-    title: t('sidebar.home'),
-    icon: 'i-carbon-home',
-    path: '/dashboard',
-    children: [
-      {
-        title: t('sidebar.dashboard'),
-        icon: 'i-carbon-dashboard',
-        path: '/dashboard',
-      },
-    ],
-  },
-  {
-    title: t('sidebar.components'),
-    icon: 'i-carbon-assembly-cluster',
-    path: '/components',
-    children: [
-      {
-        title: 'Alerts',
-        path: '/components/alerts',
-      },
-      {
-        title: 'Avatars',
-        path: '/components/avatars',
-      },
-      {
-        title: 'Badges',
-        path: '/components/badges',
-      },
-      {
-        title: 'Breadcrumbs',
-        path: '/components/breadcrumbs',
-      },
-      {
-        title: 'Buttons',
-        path: '/components/buttons',
-      },
-      {
-        title: 'Button groups',
-        path: '/components/button-groups',
-      },
-      {
-        title: 'Icons',
-        path: '/components/icons',
-      },
-      {
-        title: 'Cards',
-        path: '/components/cards',
-      },
-      {
-        title: 'Text Fields',
-        path: '/components/text-fields',
-      },
-      {
-        title: 'Checkboxes',
-        path: '/components/checkboxes',
-      },
-      {
-        title: 'Radio Buttons',
-        path: '/components/radio-buttons',
-      }
-    ],
-  },
-  {
-    title: t('sidebar.team'),
-    icon: 'i-carbon-collaborate',
-    path: '/team',
-  },
-  {
-    title: t('sidebar.projects'),
-    icon: 'i-carbon-document',
-    path: '/projects',
-  },
-  {
-    title: t('sidebar.calendar'),
-    icon: 'i-carbon-calendar',
-    path: '/calendar',
-  },
-  {
-    title: t('sidebar.reports'),
-    icon: 'i-carbon-report-data',
-    path: '/reports',
-  },
-])
-
-
-const sidebar = ref<HTMLElement>()
-const sidebarClass = ref('')
-onMounted(() => {
-  window.onscroll = () => {
-    if (window.pageYOffset > 180)
-      sidebarClass.value = 'top-4 bottom-0'
-    else
-      sidebarClass.value = 'top-48'
+    id: 2,
+    label: 'Search words',
+    url: 'http://example.com'
   }
-})
-</script>
-<template>
-  <!-- sidebar -->
-  <aside ref="sidebar" class="sidebar" :class="[sidebarCollapsed ? 'sidebar__collapsed' : 'sidebar__not_collapsed']">
-    <div>
-      <div class="flex w-full">
-        <BurgerMenuBtn @open="sidebarCollapsed = !sidebarCollapsed" />
-      </div>
-      <div class="flex flex-col">
-        <div class="absolute left-0 w-full mt-5 top-16">
-          <nav class="flex-1 mt-5 text-xs font-medium leading-5 md:text-sm">
-            <ul class="max-h-screen m-0 ml-0 list-none">
-              <li v-for="(item, index) in sidebarItems" :key="item.title"
-                :class="`${currentIndex === index ? 'bg-gray-100 dark:bg-primary-700 ' : ''} `">
-                <span :class="`${sidebarCollapsed ? 'justify-center' : ''}
-                                  ${currentIndex === index ? 'bg-gray-200 dark:bg-primary-700' : ''}
-                sidebar-item block py-4  px-4 flex items-center rtl:space-x-reverse space-x-2 cursor-pointer  decoration-none  leading-5  group  focus:outline-none  transition duration-150 ease-in-out`"
-                  @click="setCurrentIndex(index)">
-                  <span :class="`${item.icon} text-lg block`" />
 
-                  <span v-if="!sidebarCollapsed" class="block">{{ item.title }}</span>
-                  <span v-if="!sidebarCollapsed && item.children" class="i-carbon-chevron-down">{{
-                  item.title
-                  }}</span>
-                </span>
-                <CollapseTransition>
-                  <ul v-if="item.children && !sidebarCollapsed && currentIndex === index"
-                    class="opacity-75 transition-height duration-1000">
-                    <li v-for="child in item.children" :key="child.title" class="pl-4 hover:scale-105 transition-all">
-                      <RouterLink
-                        :class="` block py-2 text-xs  px-4 flex items-center rtl:space-x-reverse space-x-2  decoration-none  leading-5  group  focus:outline-none focus:font-bold transition duration-150 ease-in-out`"
-                        :to="child.path" :href="child.path">
-                        <span class="i-carbon-software-resource" />
-                        <span v-if="!sidebarCollapsed">{{ child.title }}</span>
-                      </RouterLink>
-                    </li>
-                  </ul>
-                </CollapseTransition>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </aside>
+//   {
+//     title: t('sidebar.statistics'),
+// //    icon: 'i-carbon-home',
+// //    path: '/statistics/index',
+//     children: [
+//       {
+//         title: t('statistics.count'),
+//         icon: 'i-carbon-dashboard',
+//         path: '/statistics/page-views',
+//       },
+//     ],
+//   }
+  ])
+</script>
+
+<template>
+  <section
+      class="absolute top-0 left-0 h-full w-60 ">
+    <!-- Sidenav -->
+    <nav
+        id="sidenav-8"
+        class="absolute top-0 left-0 z-[1035] h-full w-60 -translate-x-full overflow-auto bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] data-[te-sidenav-hidden='false']:translate-x-0 dark:bg-zinc-800"
+        data-te-sidenav-init
+        data-te-sidenav-hidden="false"
+        data-te-sidenav-position="absolute"
+        data-te-sidenav-accordion="true">
+      <a
+          class="mb-3 flex items-center justify-center border-b-2 border-solid border-gray-100 py-6 outline-none"
+          href="#!"
+          data-te-ripple-init
+          data-te-ripple-color="primary">
+        <img
+            id="te-logo"
+            class="mr-2 w-8"
+            src="https://tailwind-elements.com/img/logo.png"
+            alt="TE Logo"
+            draggable="false" />
+        <span>WatsNext</span>
+      </a>
+
+      <ul
+          class="relative m-0 list-none px-[0.2rem] pb-12"
+          data-te-sidenav-menu-ref>
+        <li class="relative" v-for="item in sidebarItems" :key="item.id">
+
+        <span v-if="item.header"
+            class="py-4 px-6 text-[0.6rem] font-bold uppercase text-gray-600 dark:text-gray-400"
+        >{{item.header}}</span
+        >
+          <a
+              class="flex cursor-pointer items-center truncate rounded-[5px] py-[0.45rem] px-6 text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+              data-te-sidenav-link-ref
+              :href="item.url"
+          >
+          <span
+              class="mr-4 [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="h-5 w-5">
+              <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </span>
+            <span>{{item.label}}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- Sidenav -->
+
+    <!-- Toggler
+    <button
+        class="mt-10 inline-block rounded bg-blue-600 px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
+        data-te-sidenav-toggle-ref
+        data-te-target="#sidenav-8"
+        aria-controls="#sidenav-8"
+        aria-haspopup="true">
+    <span class="block [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-white">
+      <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="h-5 w-5">
+        <path
+            fill-rule="evenodd"
+            d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
+            clip-rule="evenodd" />
+      </svg>
+    </span>
+    </button>
+   Toggler -->
+  </section>
 </template>
 
-<style scoped>
-.sidebar {
-  @apply fixed bottom-4 top-4 overflow-x-hidden overflow-y-auto w-64 bg-white dark:bg-primary-800 h-full md:h-[calc(100vh_-_6rem)] z-[999] select-none md:top-20 left-4 rtl:left-auto rtl:right-4 transition-all duration-500 rounded-lg p-2 shadow-md;
-}
 
-.sidebar__collapsed {
-  @apply w-12 md:w-16 h-12 md:h-auto;
-}
+
+<style scoped>
+
 </style>
