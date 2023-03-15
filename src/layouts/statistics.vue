@@ -15,10 +15,8 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "statistics"
-}
+<script setup>
+
 </script>
 
 <style scoped>

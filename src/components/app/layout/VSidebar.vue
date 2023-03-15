@@ -18,13 +18,14 @@ watch(
 const currentIndex = ref(-1)
 function setCurrentIndex(index: number) {
   currentIndex.value = index === currentIndex.value ? -1 : index
+  console.log('SET ACTIVE to', index)
   sidebarCollapsed.value = false
 }
 
 const route = useRoute()
 onMounted(() => {
   const path = route.path
-  setCurrentIndex(sidebarItems.value.findIndex(item => path.startsWith(item.path)))
+  setCurrentIndex(sidebarItems.value.findIndex(item => path.startsWith(item.url)))
 })
 
 const sidebarItems = computed(() => [
@@ -32,12 +33,12 @@ const sidebarItems = computed(() => [
     id: 1,
     header: 'Statistics',
     label: 'Page views',
-    url: 'http://test.url'
+    url: '/statistics/page-views'
   },
   {
     id: 2,
     label: 'Search words',
-    url: 'http://example.com'
+    url: '/statistics/search-words'
   }
 
 //   {
@@ -83,34 +84,37 @@ const sidebarItems = computed(() => [
       <ul
           class="relative m-0 list-none px-[0.2rem] pb-12"
           data-te-sidenav-menu-ref>
-        <li class="relative" v-for="item in sidebarItems" :key="item.id">
+        <li class="relative" v-for="(item, index) in sidebarItems" :key="item.id">
 
         <span v-if="item.header"
             class="py-4 px-6 text-[0.6rem] font-bold uppercase text-gray-600 dark:text-gray-400"
         >{{item.header}}</span
         >
-          <a
-              class="flex cursor-pointer items-center truncate rounded-[5px] py-[0.45rem] px-6 text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-              data-te-sidenav-link-ref
-              :href="item.url"
-          >
-          <span
-              class="mr-4 [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="h-5 w-5">
-              <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-          </span>
-            <span>{{item.label}}</span>
-          </a>
+          <div :class="`${currentIndex === index ? 'bg-gray-200 dark:bg-primary-700 ' : ''} `">
+            <a
+                class="flex cursor-pointer items-center truncate rounded-[5px] py-[0.45rem] px-6 text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+
+                data-te-sidenav-link-ref
+                :href="item.url"
+            >
+            <span
+                class="mr-4 [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+              <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="h-5 w-5">
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+            </span>
+              <span>{{item.label}}</span>
+            </a>
+          </div>
         </li>
       </ul>
     </nav>
