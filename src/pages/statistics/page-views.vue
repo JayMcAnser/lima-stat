@@ -10,6 +10,5 @@ meta:
 </route>
 
 <script setup lang="ts">
-import RangeSetter from "~/components/statistics/range-setter.vue";
-import StatInfo from "~/components/statistics/stat-info.vue";
+
 </script>
